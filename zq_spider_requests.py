@@ -32,83 +32,83 @@ class ZqSpider(object):
         resp.encoding = 'GBK'
         resp.encoding = 'utf-8'
 
-        #logger.info('打开模板文件:' + self.in_file_path)
-        #rb = xlrd.open_workbook(self.in_file_path,formatting_info=True)
-        #wb = copy(rb)
-        #sheet = wb.get_sheet(rb.nsheets - 1)
+        logger.info('打开模板文件:' + self.in_file_path)
+        rb = xlrd.open_workbook(self.in_file_path,formatting_info=True)
+        wb = copy(rb)
+        sheet = wb.get_sheet(rb.nsheets - 1)
 
         logger.info('开始解析联赛积分排名')
         soup = BeautifulSoup(resp.text,'lxml')
-        #table_first = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(1) > td:nth-child(1) > table')
+        table_first = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(1) > td:nth-child(1) > table')
 
-        #trs = table_first[0].find_all('tr')
-        #i = 0
-        #cols = 0
-        #rows = 3
-        #first_match_name = ""
-        #for tr in trs:#遍历后续节点
-        #    if i == 0:
-        #        first_match_name = tr.find_all('b')[0].text
-        #        logger.info('开始解析' + first_match_name + '全场')
-        #        sheet.write(rows,cols,tr.find_all('b')[0].text)
-        #        rows = rows + 1
-        #    else:
-        #        cols = 0
-        #        for td in tr.find_all('td'):
-        #           sheet.write(rows,cols,td.text)
-        #           cols = cols + 1
-        #        rows = rows + 1
-        #    i = i + 1
+        trs = table_first[0].find_all('tr')
+        i = 0
+        cols = 0
+        rows = 3
+        first_match_name = ""
+        for tr in trs:#遍历后续节点
+            if i == 0:
+                first_match_name = tr.find_all('b')[0].text
+                logger.info('开始解析' + first_match_name + '全场')
+                sheet.write(rows,cols,tr.find_all('b')[0].text)
+                rows = rows + 1
+            else:
+                cols = 0
+                for td in tr.find_all('td'):
+                   sheet.write(rows,cols,td.text)
+                   cols = cols + 1
+                rows = rows + 1
+            i = i + 1
         
 
-        #table_second = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(1) > td:nth-child(2) > table')
-        #trs = table_second[0].find_all('tr')
-        #i = 0
-        #cols = 11
-        #rows = 3
-        #second_match_name = ""
-        #for tr in trs:#遍历后续节点
-        #    if i == 0:
-        #        second_match_name = tr.find_all('b')[0].text
-        #        logger.info('开始解析' + second_match_name + '全场')
-        #        sheet.write(rows,cols,tr.find_all('b')[0].text)
-        #        rows = rows + 1
-        #    else:
-        #        cols = 11
-        #        for td in tr.find_all('td'):
-        #           sheet.write(rows,cols,td.text)
-        #           cols = cols + 1
-        #        rows = rows + 1
-        #    i = i + 1
+        table_second = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(1) > td:nth-child(2) > table')
+        trs = table_second[0].find_all('tr')
+        i = 0
+        cols = 11
+        rows = 3
+        second_match_name = ""
+        for tr in trs:#遍历后续节点
+            if i == 0:
+                second_match_name = tr.find_all('b')[0].text
+                logger.info('开始解析' + second_match_name + '全场')
+                sheet.write(rows,cols,tr.find_all('b')[0].text)
+                rows = rows + 1
+            else:
+                cols = 11
+                for td in tr.find_all('td'):
+                   sheet.write(rows,cols,td.text)
+                   cols = cols + 1
+                rows = rows + 1
+            i = i + 1
         
-        #ban_rows = rows
-        #logger.info('开始解析' + first_match_name + '半场')
-        #table_third = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(2) > td:nth-child(1) > table')
-        #trs = table_third[0].find_all('tr')
-        #cols = 0
-        #for tr in trs:#遍历后续节点
-        #    cols = 0
-        #    for td in tr.find_all('td'):
-        #        sheet.write(rows,cols,td.text)
-        #        cols = cols + 1
-        #    rows = rows + 1
+        ban_rows = rows
+        logger.info('开始解析' + first_match_name + '半场')
+        table_third = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(2) > td:nth-child(1) > table')
+        trs = table_third[0].find_all('tr')
+        cols = 0
+        for tr in trs:#遍历后续节点
+            cols = 0
+            for td in tr.find_all('td'):
+                sheet.write(rows,cols,td.text)
+                cols = cols + 1
+            rows = rows + 1
 
-        #logger.info('开始解析' + second_match_name + '半场')
-        #table_fourth = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(2) > td:nth-child(2) > table')
-        #trs = table_fourth[0].find_all('tr')
-        #cols = 11
-        #rows = ban_rows
-        #for tr in trs:#遍历后续节点
-        #    cols = 11
-        #    for td in tr.find_all('td'):
-        #        sheet.write(rows,cols,td.text)
-        #        cols = cols + 1
-        #    rows = rows + 1
+        logger.info('开始解析' + second_match_name + '半场')
+        table_fourth = soup.select('#porlet_5 > div > table > tbody > tr:nth-child(2) > td:nth-child(2) > table')
+        trs = table_fourth[0].find_all('tr')
+        cols = 11
+        rows = ban_rows
+        for tr in trs:#遍历后续节点
+            cols = 11
+            for td in tr.find_all('td'):
+                sheet.write(rows,cols,td.text)
+                cols = cols + 1
+            rows = rows + 1
 
 
-        #wb.save(self.out_file_path)
+        wb.save(self.out_file_path)
 
-        # soup = BeautifulSoup(r.text, 'html.parser')
+        soup = BeautifulSoup(r.text, 'html.parser')
         src = soup.select('#webmain script')[0].string
         # print('---------')
         # print(src)
