@@ -127,5 +127,6 @@ qr_code.png
 /.vs/PythonSettings.json
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite
-/.vs/500_spider/v16/.suo
-/test1.xls
+/.vs
+/__pycache__
+/build
